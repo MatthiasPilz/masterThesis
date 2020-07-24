@@ -1,0 +1,13 @@
+msc/initial_data
+src/ader_weno
+src/data
+src/grid
+src/main
+src/output
+src/projects
+src/projects/advection
+src/projects/bulev
+src/projects/burger
+src/projects/euler
+src/projects/grhdc
+src/projects/wave

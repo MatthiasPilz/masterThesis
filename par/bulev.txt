@@ -1,0 +1,16 @@
+project = bulev
+M = 3
+M_sub = 3
+N = 100
+xRange = 2.0
+xMin = -1.0
+CFL_sub = 0.2
+boundary = periodic
+tEND = 0.4
+eps = 1e-17
+output = 1
+Npoly = 10
+shape = paper
+conv_step = 9
+conv_N_start = 50
+conv_N_end = 50

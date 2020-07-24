@@ -1,0 +1,15 @@
+project = dumbser
+M = 3
+N = 100
+xRange = 1.0
+xMin = 0.0
+boundary = periodic
+CFL = 0.1
+tEND = 0.12
+eps = 1e-16
+output = 1
+Npoly = 10
+shape = gauss
+conv_step = 9
+conv_N_start = 36
+conv_N_end = 2000

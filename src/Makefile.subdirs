@@ -1,0 +1,43 @@
+###############################################################################
+# Makefile.subdirs                                                            #
+# These commands are common to all standard source subdirectories.            #
+###############################################################################
+
+###############################################################################
+# the name of the library that we want to create                              #
+###############################################################################
+NEWLIB = lib$(NAME).a
+
+###############################################################################
+# directory for the object files of this library                              #
+###############################################################################
+
+OBJDIR       = $(LIBDIR)/obj/$(NAME)
+SUBOBJDIRS   = $(dir $(OBJS))
+OBJSWITHPATH = $(addprefix $(OBJDIR)/,$(OBJS))
+
+###############################################################################
+# Targets                                                                     #
+###############################################################################
+
+# Main target
+all:  SUBOBJDIRS SUBDIRS  $(LIBDIR)/$(NEWLIB)
+
+# Create subdirs in obj dir if source files are in subdirs
+SUBOBJDIRS:
+	@for X in $(SUBOBJDIRS); do mkdir -p $(LIBDIR)/obj/$(NAME)/$$X; done
+
+# If there are subdirs which should become libraries, process them
+SUBDIRS:
+	@for X in $(SUBDIRS); do mkdir -p $(LIBDIR)/obj/$$X; done
+	@for X in $(SUBDIRS); do $(MAKE) -C $$X; done
+
+.SECONDARY:
+
+# Create library out of objects in current directory
+$(LIBDIR)/$(NEWLIB): $(OBJSWITHPATH)
+	@ar rucs $@ $(OBJSWITHPATH)
+
+# Source to object rule
+$(OBJDIR)/%.o: %.c $(TOP)/main/ader.h Makefile $(NAME).h
+	$(CC) $(CFLAGS) -o $@ -c $*.c
